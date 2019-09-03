@@ -24,15 +24,15 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <buttons:SfButton Command="{Binding nfcScanCmd}" Text="NFC Scan" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" TextColor="Black" BackgroundColor="LightCoral" BorderColor="Gray" BorderWidth="4" CornerRadius="10" />
-            <buttons:SfButton Command="{Binding ButtonCommand}" Text="Add data to DB" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" TextColor="Black" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="4" CornerRadius="10" />
+            <buttons:SfButton Command="{Binding NfcScanCmd}" Text="{Binding BtnNfcScanTxt}" IsVisible="{Binding IsNfcAvailable}" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" TextColor="Black" BackgroundColor="LightCoral" BorderColor="Gray" BorderWidth="4" CornerRadius="10" />
+            <buttons:SfButton Command="{Binding ButtonCommand}" Text="Add data to DB" IsVisible="{Binding IsDataToStoreAvailable}" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" TextColor="Black" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="4" CornerRadius="10" />
 
-            <buttons:SfButton Command="{Binding bleScanCmd}" Text="BLE Scan" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" TextColor="Black" BackgroundColor="LightCoral" BorderColor="Gray" BorderWidth="4" CornerRadius="10" />
-            <buttons:SfButton Command="{Binding ButtonCommand}" Text="CONNECT" FontAttributes="Bold" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" TextColor="Black" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="4" CornerRadius="10" />
+            <buttons:SfButton Command="{Binding BleScanCmd}" Text="{Binding BtnBleScanTxt}" IsVisible="{Binding IsbleScanEnabled}" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" TextColor="Black" BackgroundColor="LightCoral" BorderColor="Gray" BorderWidth="4" CornerRadius="10" />
+            <buttons:SfButton Command="{Binding BleConnectCmd}" Text="{Binding BtnBleConnectTxt}" IsVisible="{Binding IsBleDeviceSelected}" FontAttributes="Bold" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" TextColor="Black" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="4" CornerRadius="10" />
 
-            <buttons:SfButton Command="{Binding ButtonCommand}" Text="PING" FontAttributes="Bold" Grid.Row="2" Grid.Column="0" TextColor="Black" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="4" CornerRadius="10" HorizontalOptions="FillAndExpand" />
-            <buttons:SfButton Command="{Binding ButtonCommand}" Text="READ" FontAttributes="Bold" Grid.Row="2" Grid.Column="1" TextColor="Black" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="4" CornerRadius="10" HorizontalOptions="FillAndExpand" />
-            <buttons:SfButton Command="{Binding ButtonCommand}" Text="...." FontAttributes="Bold" Grid.Row="2" Grid.Column="2" TextColor="Black" Grid.ColumnSpan="2" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="30" CornerRadius="10" HorizontalOptions="FillAndExpand" />
+            <buttons:SfButton Command="{Binding BlePingCmd}" Text="PING" IsVisible="{Binding IsBleConnected}" FontAttributes="Bold" Grid.Row="2" Grid.Column="0" TextColor="Black" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="4" CornerRadius="10" HorizontalOptions="FillAndExpand" />
+            <buttons:SfButton Command="{Binding BleReadCmd}" Text="READ" IsVisible="{Binding IsBleConnected}" FontAttributes="Bold" Grid.Row="2" Grid.Column="1" TextColor="Black" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="4" CornerRadius="10" HorizontalOptions="FillAndExpand" />
+            <buttons:SfButton Command="{Binding ButtonCommand}" Text="...." IsVisible="False"  FontAttributes="Bold" Grid.Row="2" Grid.Column="2" TextColor="Black" Grid.ColumnSpan="2" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="4" CornerRadius="10" HorizontalOptions="FillAndExpand" />
 
 
             <Grid x:Name="dataSourceDataGrid" Grid.Row="3" Grid.ColumnSpan="4" BackgroundColor="LightGray" RowSpacing="1" HeightRequest="120" IsVisible="{Binding gridDataVisible}">
@@ -74,7 +74,7 @@
 
             </Grid>
 
-            <StackLayout Grid.Row="3" Grid.ColumnSpan="4"  IsVisible="{Binding gridBleScanaVisible}" BackgroundColor="LightGray" HeightRequest="120"  >
+            <StackLayout Grid.Row="3" Grid.ColumnSpan="4"  IsVisible="{Binding gridBleScanVisible}" BackgroundColor="LightGray" HeightRequest="120"  >
                 <ListView ItemsSource="{Binding bleDevices}" 
                           SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
                           HasUnevenRows="True" 
@@ -91,14 +91,14 @@
                                         </Grid.RowDefinitions>
                                         <Label Text="{Binding Name}" Grid.Row="0" FontAttributes="Bold" FontSize="15" />
                                         <Label Text="{Binding Uuid, StringFormat='UUID: {0}'}" Grid.Row="1" FontSize="Micro"/>
-                                        <Label Text="Device Connected" IsVisible="{Binding IsBleConnected}" BackgroundColor="Green" TextColor="Black"  HorizontalTextAlignment="Center" Grid.Row="2" />
+                                        <Label Text="Device Connected" IsVisible="{Binding IsConnected}" BackgroundColor="Green" TextColor="Black"  HorizontalTextAlignment="Center" Grid.Row="2" />
                                     </Grid>
                                 </ViewCell.View>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <ActivityIndicator IsRunning="{Binding IsBleScanning}" Grid.Row="3" Grid.ColumnSpan="4"/>
+                <ActivityIndicator IsRunning="{Binding IsBleScanning}" Scale="3" Grid.Row="3" Grid.ColumnSpan="4"/>
             </StackLayout>
 
             <StackLayout Grid.Row="4" Grid.ColumnSpan="4">

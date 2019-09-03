@@ -180,6 +180,21 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="Realm">
+      <Version>4.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.Buttons">
+      <Version>17.2.0.47</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfChart">
+      <Version>17.2.0.47</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericUpDown">
+      <Version>17.2.0.47</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
     <PackageReference Include="Prism.Unity.Forms" Version="7.2.0.1367" />
   </ItemGroup>
@@ -188,6 +203,63 @@
       <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
       <Name>eDroplet</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\about.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ble.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cgm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\glucometer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\nfc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pump.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\setup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\xamarin_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\battery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\down_fast.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\down_slow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\stable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\up_fast.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\up_slow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

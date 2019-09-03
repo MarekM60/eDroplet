@@ -5,8 +5,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.4" />
+    <PackageReference Include="Realm" Version="4.1.0" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.2.0.47" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="17.2.0.47" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericUpDown" Version="17.2.0.47" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
     <PackageReference Include="Prism.Unity.Forms" Version="7.2.0.1367" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\CgmPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\HomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

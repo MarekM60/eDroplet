@@ -1,6 +1,9 @@
 ﻿using Foundation;
 using Prism;
 using Prism.Ioc;
+using Syncfusion.SfChart.XForms.iOS.Renderers;
+using Syncfusion.SfNumericUpDown.XForms.iOS;
+using Syncfusion.XForms.iOS.Buttons;
 using UIKit;
 
 
@@ -22,6 +25,13 @@ namespace eDroplet.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+            SfChartRenderer.Init();
+            SfNumericUpDownRenderer.Init();
+            SfRadioButtonRenderer.Init();
+            SfCheckBoxRenderer.Init();
+            SfButtonRenderer.Init();
+
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

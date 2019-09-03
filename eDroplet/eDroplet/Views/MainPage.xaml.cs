@@ -7,11 +7,14 @@ using Xamarin.Forms;
 
 namespace eDroplet.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : TabbedPage
     {
         public MainPage()
         {
             InitializeComponent();
+            BarBackgroundColor = Color.Black;
+            BarTextColor = Color.White;
+            if (Device.RuntimePlatform == Device.Android) UnselectedTabColor = Color.DarkGray;
         }
     }
 }

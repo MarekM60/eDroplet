@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="eDroplet.Views.CgmPage">
+
+    <ContentPage.Content>
+        <Grid x:Name="CgmGrid" BackgroundColor="LightGray" RowSpacing="3" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+
+                <RowDefinition Height="150" />
+
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <buttons:SfButton Command="{Binding nfcScanCmd}" Text="NFC Scan" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" TextColor="Black" BackgroundColor="LightCoral" BorderColor="Gray" BorderWidth="4" CornerRadius="10" />
+            <buttons:SfButton Command="{Binding ButtonCommand}" Text="Add data to DB" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" TextColor="Black" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="4" CornerRadius="10" />
+
+            <buttons:SfButton Command="{Binding bleScanCmd}" Text="BLE Scan" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" TextColor="Black" BackgroundColor="LightCoral" BorderColor="Gray" BorderWidth="4" CornerRadius="10" />
+            <buttons:SfButton Command="{Binding ButtonCommand}" Text="CONNECT" FontAttributes="Bold" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" TextColor="Black" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="4" CornerRadius="10" />
+
+            <buttons:SfButton Command="{Binding ButtonCommand}" Text="PING" FontAttributes="Bold" Grid.Row="2" Grid.Column="0" TextColor="Black" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="4" CornerRadius="10" HorizontalOptions="FillAndExpand" />
+            <buttons:SfButton Command="{Binding ButtonCommand}" Text="READ" FontAttributes="Bold" Grid.Row="2" Grid.Column="1" TextColor="Black" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="4" CornerRadius="10" HorizontalOptions="FillAndExpand" />
+            <buttons:SfButton Command="{Binding ButtonCommand}" Text="...." FontAttributes="Bold" Grid.Row="2" Grid.Column="2" TextColor="Black" Grid.ColumnSpan="2" BackgroundColor="LightBlue" BorderColor="Gray" BorderWidth="30" CornerRadius="10" HorizontalOptions="FillAndExpand" />
+
+
+            <Grid x:Name="dataSourceDataGrid" Grid.Row="3" Grid.ColumnSpan="4" BackgroundColor="LightGray" RowSpacing="1" HeightRequest="120" IsVisible="{Binding gridDataVisible}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Data source:" Grid.Row="0" Grid.Column="0"  HorizontalOptions="Start"/>
+                <Label Text="{Binding lblDataSource}"  FontAttributes="Bold" Grid.Row="0" Grid.Column="1" HorizontalOptions="Start"/>
+
+                <Label Text="Sensor SN:" Grid.Row="1" Grid.Column="0" HorizontalOptions="Start"/>
+                <Label Text="{Binding lblSensorSn}"  FontAttributes="Bold" Grid.Row="1" Grid.Column="1" HorizontalOptions="Start"/>
+
+                <Label Text="Activated:" Grid.Row="2" Grid.Column="0" HorizontalOptions="Start"/>
+                <Label Text="{Binding lblActivation}"  FontAttributes="Bold" Grid.Row="2" Grid.Column="1" HorizontalOptions="Start"/>
+
+                <Label Text="Data from:" Grid.Row="3" Grid.Column="0" HorizontalOptions="Start"/>
+                <Label Text="{Binding lblDataReadAt}" FontAttributes="Bold" Grid.Row="3" Grid.Column="1" HorizontalOptions="Start"/>
+
+                <Label Text="Current BG:" Grid.Row="4" Grid.Column="0" HorizontalOptions="Start"/>
+                <Label Text="{Binding lblCurrentBG}" FontAttributes="Bold" Grid.Row="4" Grid.Column="1" HorizontalOptions="Start"/>
+
+                <Label Text="Trend BG:" Grid.Row="5" Grid.Column="0" HorizontalOptions="Start"/>
+                <Label Text="{Binding lblTrendBG}" FontAttributes="Bold" Grid.Row="5" Grid.Column="1" HorizontalOptions="Start"/>
+
+                <Label Text="Alarm state:" Grid.Row="6" Grid.Column="0" HorizontalOptions="Start"/>
+                <Label Text="{Binding lblAlarmState}" FontAttributes="Bold" Grid.Row="6" Grid.Column="1" HorizontalOptions="Start"/>
+
+
+            </Grid>
+
+            <StackLayout Grid.Row="3" Grid.ColumnSpan="4"  IsVisible="{Binding gridBleScanaVisible}" BackgroundColor="LightGray" HeightRequest="120"  >
+                <ListView ItemsSource="{Binding bleDevices}" 
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
+                          HasUnevenRows="True" 
+                          VerticalOptions="FillAndExpand" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell >
+                                <ViewCell.View>
+                                    <Grid x:Name="bleElementGrid" ColumnSpacing="4" RowSpacing="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="20" />
+                                            <RowDefinition Height="20" />
+                                        </Grid.RowDefinitions>
+                                        <Label Text="{Binding Name}" Grid.Row="0" FontAttributes="Bold" FontSize="15" />
+                                        <Label Text="{Binding Uuid, StringFormat='UUID: {0}'}" Grid.Row="1" FontSize="Micro"/>
+                                        <Label Text="Device Connected" IsVisible="{Binding IsBleConnected}" BackgroundColor="Green" TextColor="Black"  HorizontalTextAlignment="Center" Grid.Row="2" />
+                                    </Grid>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ActivityIndicator IsRunning="{Binding IsBleScanning}" Grid.Row="3" Grid.ColumnSpan="4"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="4" Grid.ColumnSpan="4">
+
+                <chart:SfChart x:Name="chartTmp"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                    <chart:SfChart.ChartBehaviors>
+                        <chart:ChartZoomPanBehavior EnableSelectionZooming="True" ZoomMode="X" />
+                    </chart:SfChart.ChartBehaviors>
+
+                    <chart:SfChart.PrimaryAxis>
+                        <chart:DateTimeAxis IntervalType="Minutes" />
+                    </chart:SfChart.PrimaryAxis>
+
+                    <chart:SfChart.SecondaryAxis>
+                        <chart:NumericalAxis />
+                    </chart:SfChart.SecondaryAxis>
+
+                    <chart:SfChart.Series>
+                        <chart:LineSeries ItemsSource="{Binding tmpCgmData}" Label="on-demand BG" EnableTooltip="True" />
+                    </chart:SfChart.Series>
+
+                </chart:SfChart>
+
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
